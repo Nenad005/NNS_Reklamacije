@@ -1,0 +1,112 @@
+﻿<Application x:Class="NNS_Reklamacije.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NNS_Reklamacije"
+             xmlns:converters="clr-namespace:NNS_Reklamacije.Converters">
+    <Application.Resources>
+        <converters:BoolToVisibility x:Key="InputToVisibility"/>
+        <converters:ListviewPropToTuple x:Key="SortData"/>
+        <converters:EmptyDate x:Key="EmptyDate"/>
+        <converters:DodatoPre x:Key="DodatoConv"/>
+        <converters:IndexUPrioritet x:Key="PrioritetConv"/>
+        <converters:NacinAutentifikacije x:Key="NacinAutentifikacije"/>
+
+        <Style x:Key="listFont" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        
+        <Style x:Key="PlaceholderTextbox" TargetType="{x:Type TextBox}">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Background="white"
+                                     Padding="{TemplateBinding Padding}">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="5"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                            <TextBlock Text="{TemplateBinding Tag}"
+                                       Foreground="Gray"
+                                       Padding="{TemplateBinding Padding}">
+                                <TextBlock.Visibility>
+                                    <MultiBinding Converter="{StaticResource InputToVisibility}">
+                                        <Binding ElementName="inputText" Path="Text.IsEmpty"/>
+                                        <Binding ElementName="inputText" Path="IsFocused"/>
+                                    </MultiBinding>
+                                </TextBlock.Visibility>
+                            </TextBlock>
+                            <TextBox x:Name="inputText" 
+                                     Background="Transparent"
+                                     Padding="{TemplateBinding Padding}"
+                                     Text="{TemplateBinding Text}">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="5"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="toggleable" TargetType="{x:Type DatePicker}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DatePicker}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <DatePicker Grid.Column="0"
+                                        IsEnabled="{Binding ElementName=check, Path=IsChecked}"
+                                        SelectedDate="{TemplateBinding SelectedDate}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                        x:Name="date">
+                                <DatePicker.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="4"/>
+                                    </Style>
+                                </DatePicker.Resources>
+                            </DatePicker>
+                            
+                            <CheckBox Grid.Column="1" 
+                                      x:Name="check"
+                                      VerticalAlignment="Center"
+                                      Margin="5,0,0,0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="roundedTBox" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <TextBox Text="{TemplateBinding Text}"
+                                 TextWrapping="{TemplateBinding TextWrapping}"
+                                 AcceptsReturn="{TemplateBinding AcceptsReturn}"
+                                 VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,30 @@
+﻿<Window x:Class="NNS_Reklamacije.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NNS_Reklamacije.Views"
+        xmlns:vms="clr-namespace:NNS_Reklamacije.ViewModels"
+        mc:Ignorable="d"
+        Title="NNS Reklamacije" Height="530" Width="956"
+        MinWidth="690"
+        MinHeight="450"
+        Background="#ebebeb">
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vms:ReklamacijeViewModel}">
+                <local:ReklamacijeView VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:UnosReklamacijeViewModel}">
+                <local:UnosReklamacijeView VerticalAlignment="Stretch" 
+                                           HorizontalAlignment="Stretch"/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:PodesavanjaViewModel}">
+                <local:PodesavanjaView VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            </DataTemplate>
+        </Grid.Resources>
+
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <!--<local:testView/>-->
+    </Grid>
+</Window>
